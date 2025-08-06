@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Random User Page Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <button id="generate-btn" class="generate-btn">Generate User</button>
+
+    <div id="main-user" class="card main-user"></div>
+
+    <div id="quote" class="card quote"></div>
+
+    <div id="pokemon" class="card pokemon"></div>
+
+    <div id="about-me" class="card about-me"></div>
+
+    <div id="friends" class="card friends">
+      <h3>Friends</h3>
+      <ul id="friends-list"></ul>
+    </div>
+  </div>
+
+  <script src="apiManager.js"></script>
+  <script src="user.js"></script>
+  <script src="renderer.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

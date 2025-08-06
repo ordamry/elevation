@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GIF Search</title>
+</head>
+<body>
+  <h2>🔍 Search for a GIF</h2>
+  <input type="text" id="searchInput" placeholder="Enter something..." />
+  <button onclick="searchGif()">Search</button>
+  <div id="gifResult" style="margin-top: 20px;"></div>
+
+  <script>
+    const API_KEY = "dc6zaTOxFJmzC"; // מפתח דמו
+
+    function searchGif() {
+      const query = document.getElementById("searchInput").value.trim();
+      if (!query) return;
+
+      const url = `https://api.giphy.com/v1/gifs/search?q=${encodeURIComponent(query)}&api_key=${API_KEY}&limit=1`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const container = document.getElementById("gifResult");
+          container.innerHTML = "";
+
+          if (!data.data.length) {
+            container.textContent = "😢 No results found.";
+            return;
+          }
+
+          const gifUrl = data.data[0].embed_url;
+          const iframe = document.createElement("iframe");
+          iframe.src = gifUrl;
+          iframe.width = "480";
+          iframe.height = "360";
+          iframe.frameBorder = "0";
+          container.appendChild(iframe);
+        })
+        .catch(error => console.error("Error:", error));
+    }
+  </script>
+</body>
+</html>
