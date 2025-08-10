@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+
+    "predeploy": "npm run build && rm -rf publish && mkdir -p publish/Quick-Notes-Project/quick-notes-project && cp -r dist/* publish/Quick-Notes-Project/quick-notes-project && cp publish/Quick-Notes-Project/quick-notes-project/index.html publish/Quick-Notes-Project/quick-notes-project/404.html",
+    "deploy": "gh-pages -d publish -b gh-pages"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -23,6 +26,7 @@
     "eslint": "^9.30.1",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
+    "gh-pages": "^6.3.0",
     "globals": "^16.3.0",
     "vite": "^7.0.4"
   }
