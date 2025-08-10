@@ -4,6 +4,7 @@ import TextareaAutosize from "react-textarea-autosize";
 function NoteForm ({onAddNote}) {
     const [text, setText] = useState ("")
     const [title, setTitle] = useState ("")
+    const [category, setCategory] = useState("Personal")
     
 
     const handleSubmit = (e) => {
@@ -14,6 +15,7 @@ function NoteForm ({onAddNote}) {
             id: Date.now(),
             title: title.trim() || null,
             content: text,
+            category: category,
             createdAt: new Date().toISOString()
         }
         onAddNote(newNote)
@@ -34,6 +36,17 @@ function NoteForm ({onAddNote}) {
       />
     </label>
   </div>
+
+<div>
+  <label>
+    Category:
+    <select value={category} onChange={(e) => setCategory(e.target.value)}>
+      <option value="Personal">Personal</option>
+      <option value="Work">Work</option>
+      <option value="Other">Other</option>
+    </select>
+  </label>
+</div>
 
   <div>
     <label>

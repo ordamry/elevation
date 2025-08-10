@@ -5,10 +5,12 @@ import { formatDate } from "../utils/dateFormat";
 function NoteModel({ note, isOpen, onClose, onSave }) {
   const [title, setTitle] = useState(note?.title || "");
   const [content, setContent] = useState(note?.content || "");
+  const [category, setCategory] = useState(note?.category || "Personal");
 
   useEffect(() => {
     setTitle(note?.title || "");
     setContent(note?.content || "");
+    setCategory(note?.category || "Personal");
   }, [note]);
 
   const handleSave = () => {
@@ -16,6 +18,7 @@ function NoteModel({ note, isOpen, onClose, onSave }) {
       ...note,
       title: title.trim() || null,
       content: content,
+      category: category,
       updatedAt: new Date().toISOString(),
     };
     onSave(updated);
@@ -40,6 +43,19 @@ function NoteModel({ note, isOpen, onClose, onSave }) {
           onChange={(e) => setContent(e.target.value)}
           placeholder="Write your note..."
         />
+      </div>
+      <div>
+        <label>
+          Category:
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value="Personal">Personal</option>
+            <option value="Work">Work</option>
+            <option value="Other">Other</option>
+          </select>
+        </label>
       </div>
       <small>Created at: {formatDate(note.createdAt)}</small>
       {note.updatedAt && (
