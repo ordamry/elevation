@@ -27,6 +27,10 @@ function App() {
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   };
 
+    const handleUpdateNote = (updated) => {
+    setNotes((prev) => prev.map((n) => (n.id === updated.id ? updated : n)));
+  };
+
   return (
     <div>
       <h1>QuickNotes</h1>
@@ -41,6 +45,7 @@ function App() {
     note={selectedNote}
     isOpen={true}
     onClose={closeNoteModal}
+    onSave={handleUpdateNote}
   />
 )}
 
