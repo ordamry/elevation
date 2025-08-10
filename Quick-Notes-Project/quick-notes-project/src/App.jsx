@@ -2,10 +2,14 @@ import { useState, useEffect } from "react";
 import NoteForm from "./components/NoteForm";
 import NoteGrid from "./components/NoteGrid";
 import NoteModel from "./components/NoteModel";
+import SearchBar from "./components/SearchBar";
+import CategoryFilter from "./components/CategoryFilter";
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     const saved = localStorage.getItem("notes");
@@ -38,15 +42,35 @@ function App() {
     setNotes((prev) => prev.map((n) => (n.id === updated.id ? updated : n)));
   };
 
+  const filteredNotes = notes.filter((note) => {
+    const matchesSearch =
+      note.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      note.content.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesCategory =
+      selectedCategory === "All" || note.category === selectedCategory;
+
+    return matchesSearch && matchesCategory;
+  });
+
   return (
     <div>
       <h1>QuickNotes</h1>
+
+      <SearchBar searchTerm={searchTerm} onSearchChange={setSearchTerm} />
+      <CategoryFilter
+        selectedCategory={selectedCategory}
+        onCategoryChange={setSelectedCategory}
+      />
+
       <NoteForm onAddNote={handleAddNote} />
+
       <NoteGrid
-        notes={notes}
+        notes={filteredNotes}
         onDeleteNote={handleDeleteNote}
         onNoteClick={openNoteModal}
       />
+
       {selectedNote && (
         <NoteModel
           note={selectedNote}
