@@ -1,21 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NoteForm from "./components/NoteForm";
 import NoteGrid from "./components/NoteGrid";
 import NoteModel from "./components/NoteModel";
-import Modal from "react-modal";
 
 function App() {
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("notes");
+    if (saved) {
+      setNotes(JSON.parse(saved));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
 
   const openNoteModal = (note) => {
     setSelectedNote(note);
-    setIsModalOpen(true);
   };
 
   const closeNoteModal = () => {
-    setIsModalOpen(false);
     setSelectedNote(null);
   };
 
@@ -27,7 +34,7 @@ function App() {
     setNotes((prevNotes) => prevNotes.filter((note) => note.id !== id));
   };
 
-    const handleUpdateNote = (updated) => {
+  const handleUpdateNote = (updated) => {
     setNotes((prev) => prev.map((n) => (n.id === updated.id ? updated : n)));
   };
 
@@ -41,14 +48,13 @@ function App() {
         onNoteClick={openNoteModal}
       />
       {selectedNote && (
-  <NoteModel
-    note={selectedNote}
-    isOpen={true}
-    onClose={closeNoteModal}
-    onSave={handleUpdateNote}
-  />
-)}
-
+        <NoteModel
+          note={selectedNote}
+          isOpen={true}
+          onClose={closeNoteModal}
+          onSave={handleUpdateNote}
+        />
+      )}
     </div>
   );
 }
