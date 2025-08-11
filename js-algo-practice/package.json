@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --testPathPattern=/",
+    "test": "jest",
     "test-arrayOfMultiples": "jest --testPathPattern=Easy/arrayOfMultiples.test.js",
     "test-calculator": "jest --testPathPattern=Easy/calculator.test.js",
     "test-canPartition": "jest --testPathPattern=Easy/canPartition.test.js",
@@ -60,9 +60,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/preset-env": "^7.11.0",
-    "babel-jest": "^26.2.2",
-    "jest": "^26.2.2",
     "js-beautify": "^1.13.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "babel-jest": "^30.0.5",
+    "jest": "^30.0.5"
   }
 }
