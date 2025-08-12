@@ -30,8 +30,35 @@ Notes
 All inputs are strings, no uppercases and all output must be strings.
 */
 
-function encrypt( /*args*/ ) {
-  //your code
+function encrypt( string ) {
+  let reversed = string.split("").reverse().join("")
+  let target = ""
+  for (let ch of reversed){
+  switch(ch){
+    case "a" :
+        target += 0
+        break
+    case "e" :
+        target += 1
+        break
+    case "i" :
+        target += 2
+        break
+    case "o" :
+        target += 2
+        break
+    case "u" :
+        target += 3
+        break
+    default :
+        target += ch
+        break
+  }
 }
+target += "aca"
+return target
+}
+
+console.log(encrypt("banana"))
 
 exports.solution = encrypt;
