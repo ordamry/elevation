@@ -15,8 +15,18 @@ Notes
 The digits can be discovered in any order.
 */
 
-function findAllDigits( /*args*/ ) {
-  //your code
+function findAllDigits( arr ) {
+  let digits = new Set ()
+  let i = 0 
+  while (digits.size < 10 && i < arr.length){
+    for (let ch of arr[i].toString()){
+      digits.add(Number(ch))
+    }
+    if (digits.size === 10) return arr[i]
+    i++
+  }
+  return "Missing digits !"
 }
 
+console.log(findAllDigits([5719, 7218, 3989, 8161, 2676, 3847, 6896, 3370, 2363, 1381]))
 exports.solution = findAllDigits;

@@ -18,8 +18,18 @@ factorChain([2, 4, 6, 7, 12]) ➞ false
 factorChain([10, 1]) ➞ false
 */
 
-function factorChain( /*args*/ ) {
-  //your code
+function factorChain( arr ) {
+  for (let i=0 ; i<arr.length -1 ; i++){
+    if(arr[i+1] % arr[i] != 0) return false
+  }
+  return true 
 }
+
+// option 2:
+// function factorChain (arr){
+// return arr.every((num, i) => i === 0 || num % arr[i-1] ===0)
+//}
+
+console.log (factorChain([1,2,4,8,16,32]))
 
 exports.solution = factorChain;
